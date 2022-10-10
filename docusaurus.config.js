@@ -23,33 +23,49 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['en', 'zh-Hans',],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en-GB',
+      },
+    },
   },
 
   presets: [
     [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      '@docusaurus/preset-classic',
+      {
         docs: {
+          // id: 'product', // omitted => default instance
+          path: 'docs',
+          routeBasePath: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          lastVersion: 'current',
+          onlyIncludeVersions: ['current'],
+          // ... other options
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
+      },
+    ],
+  ],
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'product',
+        path: 'product',
+        routeBasePath: 'product',
+        sidebarPath: require.resolve('./sidebars.js'),
+      }, 
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        sidebarPath: require.resolve('./sidebars.js'),
+      }, 
     ],
   ],
 
@@ -63,13 +79,24 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+          // {
+          //   type: 'doc',
+          //   docId: 'intro',
+          //   position: 'right',
+          //   label: 'Tutorial',
+          // },
+          {to: '/blog', label: 'Blog', position: 'right'},
+          {label: 'product', position: 'right',
+        items: [
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
+            to: '/product', 
+            label: '产品'
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/community', 
+            label: '社区'
+          },
+        ]},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
