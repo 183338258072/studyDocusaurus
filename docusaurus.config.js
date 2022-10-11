@@ -67,6 +67,24 @@ const config = {
         sidebarPath: require.resolve('./sidebars.js'),
       }, 
     ],
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        /**
+         * 多实例插件必填。
+         */
+        id: 'life-blog',
+        /**
+         * 你的网站上博客的 URL 路由。
+         * *请务必不要*添加末尾斜杠。
+         */
+        routeBasePath: 'lifeblog',
+        /**
+         * 相对于站点目录的文件系统路径。
+         */
+        path: './lifeblog',
+      },
+    ],
   ],
 
   themeConfig:
@@ -86,6 +104,7 @@ const config = {
           //   label: 'Tutorial',
           // },
           {to: '/blog', label: 'Blog', position: 'right'},
+          {to: '/lifeblog', id: 'life-blog', label: 'LifeBlog', position: 'right'},
           {label: 'product', position: 'right',
         items: [
           {

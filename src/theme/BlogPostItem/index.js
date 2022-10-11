@@ -11,11 +11,6 @@ function useContainerClassName() {
   return !isBlogPostPage ? 'margin-bottom--xl' : undefined;
 }
 
-function BlogPostItemFooterDiy() {
-  return <>
-    hello
-  </>
-}
 export default function BlogPostItem({children, className}) {
   const containerClassName = useContainerClassName();
   return (
