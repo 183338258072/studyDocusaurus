@@ -1,0 +1,8 @@
+.button {
+  box-sizing: border-box;
+  padding: 15px 10px;
+  border-radius: 5px;
+}
+.button:hover {
+  box-shadow: 6px 4px #000;
+}
