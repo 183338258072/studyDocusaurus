@@ -2,45 +2,51 @@
 authors: [shouren]
 tags: []
 description: 请输入描述
-title: 使用canvas实现签字版
+title: 使用canvas实现签字板
 ---
 
 
-<highlight color='#25c2a0'>摘要内容</highlight>
+
 
 <!--truncate-->
 
-```js live 
+```js
 
 
 function signatureBoard() {
   const SignatureFun = () => {
-         const canvas = document.getElementById("canvas");
+    const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
      canvas.addEventListener('mousemove',(e) => {
         const {clientX,clientY} = e;
         ctx.lineTo(clientX, clientY);
-        ctx.strokeStyle = 'red'
         ctx.stroke();
-        ctx.fill()
      })
 
-    canvas.addEventListener('click',(e) => {
+    canvas.addEventListener('mousedown',(e) => {
       const {clientX,clientY} = e;
         ctx.beginPath();
         ctx.moveTo(clientX, clientY);
      })
+     
+    canvas.addEventListener('mouseup',(e) => {
+      const {clientX,clientY} = e;
+      ctx.moveTo(clientX, clientY);
+    })
   }
   return (
-    <>
-        <canvas id='canvas' width='300' height='300' style={{border: '1px solid red'}}> </canvas>
-        <button style={{  boxSizing: 'border-box',padding:' 15px 10px',borderRadius: 5,border: 'none'}} onClick={() => SignatureFun()}> 点击开始</button>
-    </>
+    <div style={{display: 'flex',gap: 20,flexDirection: 'column'}}>
+        <canvas id='canvas' width='500' height='500' style={{border: '1px solid red'}}> </canvas>
+        <button style={{  boxSizing: 'border-box',padding:' 15px 10px',borderRadius: 5,border: 'none',cursor: 'pointer'}} onClick={() => SignatureFun()}> 点击开始</button>
+    </div>
 
   )
 }
 
 ```
+
+<highlight color='#25c2a0'>摘要内容</highlight>
+
 
 
 

@@ -8,6 +8,8 @@ export default function Highlight({children, color}) {
         borderRadius: '2px',
         color: '#fff',
         padding: '0.5em',
+        boxSizing:'border-box',
+        margin: '0.4em'
       }}>
       {children}
     </span>
