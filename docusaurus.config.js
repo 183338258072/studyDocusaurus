@@ -98,13 +98,6 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          // {
-          //   type: 'doc',
-          //   docId: 'intro',
-          //   position: 'right',
-          //   label: 'Tutorial',
-          // },
-          {to: '/', label: '首页', position: 'right'},
           {to: '/blog', label: '记录', position: 'right'},
           {to: '/lifeblog', id: 'life-blog', label: '日常', position: 'right'},
           {label: '其他', position: 'right',

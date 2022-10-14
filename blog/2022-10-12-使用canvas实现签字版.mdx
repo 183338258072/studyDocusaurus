@@ -13,47 +13,59 @@ title: 使用canvas实现签字板
 ```js
 
 
-function signatureBoard() {
-  const SignatureFun = () => {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-     canvas.addEventListener('mousemove',(e) => {
-        const {clientX,clientY} = e;
-        ctx.lineTo(clientX, clientY);
-        ctx.stroke();
-     })
+import React, { useEffect } from 'react';
+export default function signatureBoard() {
+  useEffect(() => {
+    const canvas = document.getElementById('canvas');
 
-    canvas.addEventListener('mousedown',(e) => {
-      const {clientX,clientY} = e;
-        ctx.beginPath();
-        ctx.moveTo(clientX, clientY);
-     })
-     
-    canvas.addEventListener('mouseup',(e) => {
-      const {clientX,clientY} = e;
-      ctx.moveTo(clientX, clientY);
-    })
-  }
-  return (
-    <div style={{display: 'flex',gap: 20,flexDirection: 'column'}}>
-        <canvas id='canvas' width='500' height='500' style={{border: '1px solid red'}}> </canvas>
-        <button style={{  boxSizing: 'border-box',padding:' 15px 10px',borderRadius: 5,border: 'none',cursor: 'pointer'}} onClick={() => SignatureFun()}> 点击开始</button>
-    </div>
+    const ctx = canvas.getContext('2d');
+    canvas.addEventListener('mousemove', (e) => {
+      const { offsetX, offsetY } = e;
+      ctx.lineTo(offsetX, offsetY);
+    });
 
-  )
+    canvas.addEventListener('mousedown', (e) => {
+      const { offsetX, offsetY } = e;
+      ctx.beginPath();
+      ctx.moveTo(offsetX, offsetY);
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+      const { x, y } = e;
+      ctx.moveTo(x, y);
+      ctx.stroke();
+    });
+  }, []);
+  return <canvas id="canvas" width="300" height="300" style={{ border: '1px solid red' }}></canvas>;
 }
+
 
 ```
 
-<dialog open>
-  <p>Greetings, one and all!</p>
-  <form method="dialog">
-    <button>OK</button>
-  </form>
-</dialog>
 
-<highlight color='#25c2a0'>摘要内容</highlight>
+:::caution
+ 在监听鼠标事件，应当获取点击位置与父元素的位置
+:::
 
+:::info 详见
+[MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event)
+:::
+
+
+在开始时，没有注意到这点，导致绘制的位置，总是比实际位置偏移一点距离。
+在e身上具有一下几个位置信息：
+
+#### clientX clientY
+
+当前节点距离 body 的坐标信息(? 不确定)
+
+#### offsetX offsetY
+
+当前节点距离父元素坐标信息(? 不确定)
+
+#### pageX pageY
+
+当前节点距离整个文档的坐标信息
 
 
 
