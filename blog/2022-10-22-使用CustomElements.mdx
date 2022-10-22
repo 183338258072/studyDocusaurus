@@ -1,0 +1,63 @@
+---
+authors: [shouren]
+tags: [javascript]
+description:  将HTML页面的功能封装为 custom elements（自定义标签）
+title: 使用CustomElements
+---
+
+
+原生的自定义标签，实现类似于组件效果
+
+:::info
+[Custom Elements](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components/Using_custom_elements)
+:::
+
+<!--truncate-->
+
+Custom Elements 分为两种 <highlight color="rgb(234,248,252)" textColor='#000'>Autonomous custom elements</highlight>， 作为独立的元素，不继承自其他内建的HTML元素，在使用时可以直接调用，比如`<pop-item>`。
+**Customized build-in elements** 继承基本的HTML元素，在创建时必须指定扩展的父元素，
+在使用时通过`is`属性指定custom element的名称，比如 `<p is="pop-item">` 、或者`document.createElement("p",{is: "pop-item"})`
+
+基于Web Components的特性实现，自定义标签。首先需要实现一个自定义标签的代码，可以使用es6的class语法，如下所示：
+
+
+```javascript title="实例代码" 
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    // 元素在这里创建
+  }
+
+  connectedCallback() {
+    // highlight-start
+    // 在元素被添加到文档之后，浏览器会调用这个方法
+    // highlight-end
+    //（如果一个元素被反复添加到文档／移除文档，那么这个方法会被多次调用）
+  }
+
+  disconnectedCallback() {
+    // 在元素从文档移除的时候，浏览器会调用这个方法
+    // （如果一个元素被反复添加到文档／移除文档，那么这个方法会被多次调用）
+  }
+
+  static get observedAttributes() {
+    return [/* 属性数组，这些属性的变化会被监视 */];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    // 当上面数组中的属性发生变化的时候，这个方法会被调用
+  }
+
+  adoptedCallback() {
+    // 在元素被移动到新的文档的时候，这个方法会被调用
+    // （document.adoptNode 会用到, 非常少见）
+  }
+
+  // 还可以添加更多的元素方法和属性
+}
+```
+
+
+
+
+
