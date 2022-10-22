@@ -1,59 +1,59 @@
 ---
 authors: [shouren]
-tags: []
+tags: [javascript, canvas]
 description: 请输入描述
 title: 使用canvas实现签字板
 ---
 
-
-
+简单实现一个签字板效果
 
 <!--truncate-->
 
 ```js
-
-
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 export default function signatureBoard() {
   useEffect(() => {
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById("canvas");
 
-    const ctx = canvas.getContext('2d');
-    canvas.addEventListener('mousemove', (e) => {
+    const ctx = canvas.getContext("2d");
+    canvas.addEventListener("mousemove", (e) => {
       const { offsetX, offsetY } = e;
       ctx.lineTo(offsetX, offsetY);
     });
 
-    canvas.addEventListener('mousedown', (e) => {
+    canvas.addEventListener("mousedown", (e) => {
       const { offsetX, offsetY } = e;
       ctx.beginPath();
       ctx.moveTo(offsetX, offsetY);
     });
 
-    canvas.addEventListener('mouseup', (e) => {
+    canvas.addEventListener("mouseup", (e) => {
       const { x, y } = e;
       ctx.moveTo(x, y);
       ctx.stroke();
     });
   }, []);
-  return <canvas id="canvas" width="300" height="300" style={{ border: '1px solid red' }}></canvas>;
+  return (
+    <canvas
+      id="canvas"
+      width="300"
+      height="300"
+      style={{ border: "1px solid red" }}
+    ></canvas>
+  );
 }
-
-
 ```
 
-
 :::caution
- 在监听鼠标事件，应当获取点击位置与父元素的位置
+在监听鼠标事件，应当获取点击位置与父元素的位置
 :::
 
 :::info 详见
 [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event)
 :::
 
-
 在开始时，没有注意到这点，导致绘制的位置，总是比实际位置偏移一点距离。
-在e身上具有一下几个位置信息：
+在 e 身上具有一下几个位置信息：
 
 #### clientX clientY
 
@@ -66,8 +66,3 @@ export default function signatureBoard() {
 #### pageX pageY
 
 当前节点距离整个文档的坐标信息
-
-
-
-
-

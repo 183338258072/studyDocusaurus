@@ -1,0 +1,49 @@
+---
+authors: [shouren]
+tags: [hygen]
+description: 请输入描述
+title: hygen的使用记录
+---
+
+介绍一个非常使用的模板生成器`hygen`
+
+:::info 官网
+[Hygen](https://www.hygen.io/)
+:::
+
+<!--truncate-->
+
+## 安装
+
+```node
+npm i -g hygen
+```
+
+## 初始化
+
+```node
+hygen init self
+```
+
+初始化完成后，在项目根目录下会生成一个\_templates 的文件夹
+
+## 创建生成器
+
+```node
+hygen generator new generatorName --action actionName
+```
+
+`generatorName`是这个模板的名字，例如 `blog`
+
+`actionName` 生成器的 action 关键字，例如 `add` (**可选项**,默认是 new)
+
+执行如下命令`hygen generator new blog`
+
+## 使用
+
+如果上一步指定了 actionName, 执行命令如下
+`hygen generatorName actionName fileName`
+
+| generatorName | actionName                  | fileName       |
+| ------------- | --------------------------- | -------------- |
+| 生成器名字    | 指定的 actionName，默认 new | 3 生成的文件名 |
