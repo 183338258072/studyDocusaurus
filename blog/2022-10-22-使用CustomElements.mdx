@@ -1,10 +1,9 @@
 ---
 authors: [shouren]
 tags: [javascript]
-description:  将HTML页面的功能封装为 custom elements（自定义标签）
+description: 将HTML页面的功能封装为 custom elements（自定义标签）
 title: 使用CustomElements
 ---
-
 
 原生的自定义标签，实现类似于组件效果
 
@@ -14,14 +13,15 @@ title: 使用CustomElements
 
 <!--truncate-->
 
-Custom Elements 分为两种 <highlight color="rgb(234,248,252)" textColor='#000'>Autonomous custom elements</highlight>， 作为独立的元素，不继承自其他内建的HTML元素，在使用时可以直接调用，比如`<pop-item>`。
-**Customized build-in elements** 继承基本的HTML元素，在创建时必须指定扩展的父元素，
-在使用时通过`is`属性指定custom element的名称，比如 `<p is="pop-item">` 、或者`document.createElement("p",{is: "pop-item"})`
+Custom Elements 分为两种:
 
-基于Web Components的特性实现，自定义标签。首先需要实现一个自定义标签的代码，可以使用es6的class语法，如下所示：
+- **<highlight color="rgb(234,248,252)" textColor='#000'>Autonomous custom elements</highlight>**， 作为独立的元素，不继承自其他内建的 HTML 元素，在使用时可以直接调用，比如`<pop-item>`。
+- **<highlight color="rgb(234,248,252)" textColor='#000'>Customized build-in elements</highlight>** 继承基本的 HTML 元素，在创建时必须指定扩展的父元素，
+  在使用时通过`is`属性指定 custom element 的名称，比如 `<p is="pop-item">` 、或者`document.createElement("p",{is: "pop-item"})`
 
+基于 Web Components 的特性实现，自定义标签。首先需要实现一个自定义标签的代码，可以使用 es6 的 class 语法，如下所示：
 
-```javascript title="实例代码" 
+```javascript title="实例代码"
 class MyElement extends HTMLElement {
   constructor() {
     super();
@@ -41,7 +41,9 @@ class MyElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [/* 属性数组，这些属性的变化会被监视 */];
+    return [
+      /* 属性数组，这些属性的变化会被监视 */
+    ];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -57,7 +59,17 @@ class MyElement extends HTMLElement {
 }
 ```
 
+### 注册自定义标签
 
+```javascript 固定语法
+Customized.define(name, class, ...options);
+Customized.define("pop-item", MyElement, { extends: "p" });
+```
 
+:::tip
 
+- `name` 代表在 html 文件中的名字，例如上边的`pop-item`
+- `class`代表实现元素行为的类，例如上边的`MyElement`
+- `options`代表自定义元素继承那个内置元素，(可选项),包含 extends 属性的配置`对象`
 
+:::
