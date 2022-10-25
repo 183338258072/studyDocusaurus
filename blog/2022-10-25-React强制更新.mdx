@@ -1,0 +1,92 @@
+---
+authors: [shouren]
+tags: [React]
+description: 在field-form 源码中看见的一段代码，比较好奇，所以详细了解了一下
+title: React强制更新
+---
+:::info 代码如下`const [, forceUpdate] = React.useState({});`
+:::
+
+
+在Google上搜索，在StackOverflow论坛看到下面的问题
+
+:::tip
+[How can I force a component to re-render with hooks in React?](https://stackoverflow.com/questions/53215285/how-can-i-force-a-component-to-re-render-with-hooks-in-react)
+:::
+
+提问者大致是说在使用类组件是可以使用`forceUpdate`方法来强制更新数据，但是问题是如何在Hook组件中如何实现强制更新
+<!--truncate-->
+
+### 强制更新
+
+下方采纳最多的回答是 可以使用`useState`或者`useReducer`,`useState` 内部使用了`useReducer`
+```javascript
+const [, updateState] = React.useState();
+const forceUpdate = React.useCallback(() => updateState({}), []);
+```
+
+在这个在线编译器中，可以看到很多方法
+:::info
+[Demo](https://codesandbox.io/s/useforceupdate-hook-sd8xi)
+:::
+
+### 结合TypeScript使用
+
+#### useState
+
+```javascript
+const forceUpdate: () => void = React.useState({})[1].bind(null, {})  // see NOTE below
+```
+
+#### useReducer (recommended)
+```javascript
+const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
+```
+
+#### as custom hook
+```javascript
+function useForceUpdate(): () => void {
+  return React.useReducer(() => ({}), {})[1] as () => void // <- paste here
+}
+```
+
+下边还有帮助者给出的为什么这样可以实现强制更新，但是我没看懂&#x1f602; 之后了解React机制后再来完善吧
+
+
+再往下仔细看，发现React官方已经给出了答案，可能是我好久没有看官方文档了，没注意这部分，官方答案。与社区回答原理一致
+```javascript
+const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  function handleClick() {
+    forceUpdate();
+  }
+```
+
+可以基于以上定义一个Hooks函数`useForceUpdate`
+
+```javascript
+import React from 'react'
+import { useState, useCallback } from 'react'
+
+export default function useForceUpdate() {
+  const [,setTick] = useState(0)
+  const update = useCallback(() => {
+    setTick(tick => tick + 1)
+  },[])
+  return update;
+}
+```
+
+#### 具体使用
+
+```javascript
+const forceUpdate = useForceUpdate();
+if(...) {
+  forceUpdate()
+}
+```
+
+
+
+
+
+
