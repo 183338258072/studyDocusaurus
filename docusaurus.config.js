@@ -104,15 +104,15 @@ const config = {
         items: [
           {
             to: '/product', 
-            label: '组件库'
+            label: '博客常用'
           },
           {
             to: '/community', 
-            label: '函数'
+            label: '开发常用'
           },
         ]},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/lookmori',
             label: 'GitHub',
             position: 'right',
           },
