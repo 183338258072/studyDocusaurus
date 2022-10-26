@@ -77,8 +77,9 @@ Customized.define("pop-item", MyElement, { extends: "p" });
 - `class`代表实现元素行为的类，例如上边的`MyElement`
 - `options`代表自定义元素继承那个内置元素，(可选项),包含 extends 属性的配置`对象`
 
-[一个简单的例子](https://codesandbox.io/s/delicate-sky-s6fv4z?file=/src/App.js)
 :::
+
+ ### [一个简单的例子](https://codesandbox.io/s/delicate-sky-s6fv4z?file=/src/App.js)
 
 
 
@@ -121,3 +122,7 @@ class ExpandingList extends HTMLUListElement {
 ```javascript
 static get observedAttributes() {return ['w', 'l']; }
 ````
+
+### 目前存在的问题
+
+经过测试，好像无法监听自定义元素内部标签的事件。比如上边的[实例](#一个简单的例子)。也许是我没有找到吧，后边如果找到再来补充。:joy:

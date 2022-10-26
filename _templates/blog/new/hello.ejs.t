@@ -12,8 +12,6 @@ title: <%= name %>
 摘要内容
 <!--truncate-->
 
-console.log(hello)
-
 
 
 

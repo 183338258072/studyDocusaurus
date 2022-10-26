@@ -1,0 +1,59 @@
+---
+authors: [shouren]
+tags: [javascript]
+description: 在MDN上搜索CustomElements时发现有个类似的东西，就看了看，了解一下
+title: CustomEvent自定义事件
+---
+
+正如CustomElements一样，看名字可以知道它是用于创建自定义事件的。
+:::info
+[CustomEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/CustomEvent/CustomEvent)
+:::
+
+自定义事件的使用比较简单
+
+```javascript
+const event = new CustomEvent(name, ...options)
+```
+
+* `name` 自定义事件名
+* `options` 配置项，如下
+  - `detail` {event 相关的数据，默认是null}
+  - `boolean` 是否冒泡 chrome默认是false
+  - `boolean` 是否可以取消
+<!--truncate-->
+
+
+### 实例代码
+
+```javascript live
+function CustButton() {
+  const [data,setData] = useState(0)
+  return (
+    <button style={{borderRadius: 10,padding: '1.5em 1em',border: 'none',backgroundColor: 'rgba(53,120,229,.5)',color: '#fff'}} onClick={() => {
+      const btn = document.querySelector('button');
+      btn.addEventListener('go',(e) => {
+        console.log('自定义事件调用了')
+        console.log(e,'自定义事件调用了')
+        setData('自定义事件调用了' + e.detail.hello)
+      })
+      const newEvent = new CustomEvent('go',{
+        detail: {
+          hello: 'world'
+        }
+      })
+      btn.dispatchEvent(newEvent)
+      }}>
+      点击{data}
+    </button>
+  )
+}
+
+```
+
+
+
+
+
+
+
