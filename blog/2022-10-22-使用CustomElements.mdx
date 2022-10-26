@@ -77,6 +77,7 @@ Customized.define("pop-item", MyElement, { extends: "p" });
 - `class`代表实现元素行为的类，例如上边的`MyElement`
 - `options`代表自定义元素继承那个内置元素，(可选项),包含 extends 属性的配置`对象`
 
+[一个简单的例子](https://codesandbox.io/s/delicate-sky-s6fv4z?file=/src/App.js)
 :::
 
 
@@ -111,6 +112,12 @@ class ExpandingList extends HTMLUListElement {
 
 ### custom elements 的生命周期
 
-|connectedCallback|disconnectedCallback|adoptedCallback|attributeChangedCallback|||
+|connectedCallback|disconnectedCallback|adoptedCallback|attributeChangedCallback|
 |----|----|----|----|----|----|
-|首次被插入文档调用|从DOM文档中删除掉用|移动到新文档调用|增加删除修改自身属性调用|||
+|首次被插入文档调用|从DOM文档中删除掉用|移动到新文档调用|增加删除修改自身属性调用|
+
+
+`attributeChangedCallback`会在元素属性发生改变时调用。如果想在某个属性发生变化时调用`attributeChangedCallback`,必须调用`observedAttributes()`监听这个属性，具体使用
+```javascript
+static get observedAttributes() {return ['w', 'l']; }
+````

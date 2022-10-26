@@ -1,0 +1,30 @@
+{
+  "title": {
+    "message": "My Site",
+    "description": "The title in the navbar"
+  },
+  "item.label.记录": {
+    "message": "记录",
+    "description": "Navbar item with label 记录"
+  },
+  "item.label.日常": {
+    "message": "日常",
+    "description": "Navbar item with label 日常"
+  },
+  "item.label.其他": {
+    "message": "其他",
+    "description": "Navbar item with label 其他"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.博客常用": {
+    "message": "博客常用",
+    "description": "Navbar item with label 博客常用"
+  },
+  "item.label.开发常用": {
+    "message": "开发常用",
+    "description": "Navbar item with label 开发常用"
+  }
+}
