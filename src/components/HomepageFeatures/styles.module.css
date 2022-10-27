@@ -9,3 +9,12 @@
   height: 200px;
   width: 200px;
 }
+.hv {
+  border-radius: 10px;
+  border: none;
+}
+.hv:hover {
+  box-shadow: 10px 8px 3px #DADDE2;
+  transition: all .4s;
+  color: #00754B;
+}

@@ -1,57 +1,63 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
-
+import Link from '@docusaurus/Link';
 type FeatureItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
+  to: string
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: '博客',
+    to: '/blog',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        记录了工作中遇到的问题和解决办法，当然也有没有解决的，先做记录，之后再来补充
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: '学习',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    to: '/lifeblog',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        一些新接触的东西，记录在这里
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: '想法',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    to: '/product',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        一些工作中的感悟吧，有时候突然之间就明白了很多东西，到时候记录一下
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, Svg, description,to}: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
+
+        <div className={clsx('col col--4',styles.hv)}>
+      <div className={clsx('text--center')}>
         <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
+      <Link to={to}>
         <h3>{title}</h3>
+        </Link>
         <p>{description}</p>
       </div>
     </div>
+
+
   );
 }
 
