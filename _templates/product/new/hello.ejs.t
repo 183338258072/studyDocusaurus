@@ -1,5 +1,5 @@
 ---
-to: product/<%= h.date() %>-<%= name %>.md
+to: product/<%= h.date() %>-<%= name %>.mdx
 ---
 
 ---
