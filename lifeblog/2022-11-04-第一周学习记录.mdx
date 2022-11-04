@@ -1,0 +1,28 @@
+---
+authors: [shouren]
+tags: [生活记录]
+description: 请输入描述
+---
+
+这周一直在利用空闲时间看rc-field-form 源码，大概了解下它的设计思路，整理下学习路径。以下是我这周通过源码学习到的东西。
+
+:::tip React的api当时只是简单看一眼，不清楚在实际开发中有什么用途
+* React.cloneElement() 
+* React.createElement()
+* React.createContext() **源码中使用最频繁的**
+* const forceUpdate = React.useCallback(() => updateState({}), []); **强制更新**
+* React.createRef
+:::
+
+<!--truncate-->
+
+
+### 体会
+在学习源码过程中，体会最深的是，对react的官方文档没有认真的读，或者说没有思考这些api可以实现什么功能或者操作。自己对React的使用只停留在能使用React开发简单的应用，而没有灵活的运用React暴露出来的api实现更多功能。其他的就是在读源码过程中，遇到不会的就要查阅资料，了解具体的作用。有问题解决问题，才是进步最快的方式。
+
+
+### 其他
+
+在源码中有很多基于需求而实现的工具函数，比如`cloneDeep`也就是我们熟知的**深克隆**，还有基于Map数据结构的自定义`NameMap`实现。平常在社区听到很多人说这些词语，但是关于他们如何实现却不太了解，通过源码学习也算是进一步拓展了下自己的知识库吧！还有一部分是关于ts的知识：泛型，联合 ，命名规范等等。
+
+
