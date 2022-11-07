@@ -1,0 +1,28 @@
+---
+authors: [shouren]
+tags: [生活记录]
+description: 根据自己读源码的理解，先实现简单的rc-frc-field-form
+---
+
+### 实现思路
+
+这里先实现下最简单的数据传递，数据控制。数据传递主要依靠React.createContext，React.ContextProvider。除此之外就是全局数据的管理，按照表单的设计原则，表单项所有数据都应交由Form控制，毕竟最后的提交工作都是Form的Finish事件触发。
+
+<!--truncate-->
+
+#### form
+* 提供全局数据管理（store），注册，注销Field的函数，
+* 传递数据给下一级组件
+#### Field
+
+* 将自身name注册到form中
+* 传递数据给下一级组件
+* 将自组件数据劫持，使其变为受控组件
+
+#### children
+
+* chidlren 子组件 ，通过props获取数据
+
+
+
+
