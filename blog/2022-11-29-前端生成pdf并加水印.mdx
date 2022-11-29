@@ -1,0 +1,93 @@
+---
+authors: [shouren]
+tags: [javascript]
+description: 记录一次处理pdf的过程
+title: 前端生成pdf并加水印
+---
+
+:::tip 问题
+
+
+需要实现前端导出pdf(我们这个展示内容主要是表格)，要求: 水印，自适应(根据内容，需要所有内容都要看见，不能遮盖，可以换页展示),横版a4。根据讨论具体实现有2种方法：
+* 后端生成pdf，前端加水印 主要借助两个库(jspdf pdf-lib)
+
+> 我这边是后端返回arrayBuffer数据，通过(window.URL.createObjectURL)处理生成链接，再借助jspdf处理，通过pdf-lib添加水印后导出
+
+* 前端生成pdf，主要借助(html2canvas jspdf)
+
+> 主要原理是把当前内容通过canvas生出图片，插入到pdf中，最后生成pdf
+
+* 前端生成pdf， 主要借助(jspdf-autotable)
+
+:::
+<!--truncate-->
+
+### 加水印
+
+:::info 
+
+pdf-lib 无法展示中文，需要加载一份字体文件 `const fontUrl = 'https://lyx-1302208913.cos.ap-nanjing.myqcloud.com/SIMHEI.TTF';`
+
+:::
+
+```javascript title="watermark.js(添加水印)"
+import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit'
+
+export default async function modifyPdf(waterText, pdfUrl) {
+// 读取pdf文件
+  const pdfDoc = await PDFDocument.load(pdfUrl);
+  // 加载默认字体
+  const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // 加载自定义字体
+   const fontUrl = 'https://lyx-1302208913.cos.ap-nanjing.myqcloud.com/SIMHEI.TTF';
+
+  // 字体转为 arrayBuffer
+  const fontBytes = await fetch(fontUrl).then((res) => res.arrayBuffer());
+  // 自定义字体挂载
+  pdfDoc.registerFontkit(fontkit);
+  const customFont = await pdfDoc.embedFont(fontBytes);
+
+  const pages = pdfDoc.getPages();
+
+  // 文字渲染配置 使用自定义字体
+  const drawTextParams = {
+    lineHeight: 50,
+    font: customFont,
+    size: 12,
+    color: rgb(0.08, 0.08, 0.2),
+    rotate: degrees(15),
+    opacity: 0.3,
+  };
+
+// 添加水印，铺满整个页面
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i];
+    const { width, height } = page.getSize();
+    for (let ix = 1; ix < width; ix += 230) {
+      // 水印横向间隔
+      let lineNum = 0;
+      for (let iy = 50; iy <= height; iy += 110) {
+        // 水印纵向间隔
+        lineNum++;
+        page.drawText(waterText, {
+          x: lineNum & 1 ? ix : ix + 70,
+          y: iy,
+          ...drawTextParams,
+        });
+      }
+    }
+  }
+
+  const res = await pdfDoc.save();
+  return res;
+}
+```
+
+
+
+
+
+
+
