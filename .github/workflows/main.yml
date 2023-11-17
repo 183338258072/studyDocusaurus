@@ -49,5 +49,5 @@ jobs:
           # 将项目那些文件上传到服务器
           local_path: "./build/*"
           # 上传到服务器的那个目录下
-          remote_path: "/root/Blog"
+          remote_path: "/www/wwwroot/Blog"
           password: "${{secrets.SERVER_PASSWORD}}"
