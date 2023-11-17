@@ -6,7 +6,7 @@ name: CI
 on:
   # 在 master分支 push 时 触发
   push:
-    branches: ["master"]
+    branches: ["main"]
 
   workflow_dispatch:
 
