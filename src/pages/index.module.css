@@ -1,15 +1,14 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
 
-.heroBanner {
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
 .indexImg {
-  width: 100%;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.svg {
+  width: 50% !important;
+  height: 50%;
 }
 .poetry {
   z-index: 99;
