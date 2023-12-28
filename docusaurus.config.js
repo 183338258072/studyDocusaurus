@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My',
+  title: 'lookmori',
   tagline: 'Dinosaurs are cool',
   staticDirectories: ['public', 'static'],
   url: 'https://your-docusaurus-test-site.com',
@@ -18,7 +18,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: '', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  projectName: 'lookmori', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -93,7 +93,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'lookmori',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -132,6 +132,19 @@ const config = {
             ],
           },
           {
+            title:'链接',
+            items:[
+              {
+                label:'信息产业部备案管理系统',
+                href:'https://beian.miit.gov.cn'
+              },
+              {
+                label:'豫ICP备案2022017677-1',
+                href:'#'
+              }
+            ]
+          },
+          {
             title: '更多',
             items: [
               {
@@ -145,7 +158,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()}, Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
