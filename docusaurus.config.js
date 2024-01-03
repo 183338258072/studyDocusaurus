@@ -139,8 +139,8 @@ const config = {
                 href:'https://beian.miit.gov.cn'
               },
               {
-                label:'豫ICP备案2022017677-1',
-                href:'#'
+                label:'豫ICP备2022017677号-1',
+                href:'https://beian.miit.gov.cn'
               }
             ]
           },
