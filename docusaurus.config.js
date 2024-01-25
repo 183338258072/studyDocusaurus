@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'lookmori',
+  title: '随心的前端学习日记',
   tagline: 'Dinosaurs are cool',
   staticDirectories: ['public', 'static'],
   url: 'https://your-docusaurus-test-site.com',
